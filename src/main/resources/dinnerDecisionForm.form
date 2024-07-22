@@ -1,0 +1,43 @@
+{
+  "components": [
+    {
+      "text": "What's for dinner?",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1e6v914",
+        "columns": null
+      },
+      "id": "Field_1u35rz8"
+    },
+    {
+      "values": [
+        {
+          "label": "Chicken",
+          "value": "chicken"
+        },
+        {
+          "label": "Salad",
+          "value": "salad"
+        }
+      ],
+      "label": "Dinner options:",
+      "type": "radio",
+      "layout": {
+        "row": "Row_1c1iord",
+        "columns": null
+      },
+      "id": "Field_0nvnq5j",
+      "key": "meal"
+    }
+  ],
+  "type": "default",
+  "id": "dinnerDecisionForm",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.5.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.25.0"
+  },
+  "schemaVersion": 16
+}

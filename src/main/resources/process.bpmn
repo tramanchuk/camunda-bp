@@ -33,15 +33,8 @@
       <bpmn:incoming>Flow_0q64v71</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0q64v71" sourceRef="Gateway_0zizaw3" targetRef="Event_140zejv" />
-    <bpmn:userTask id="dinnerDecisionStep" name="Make a decision">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="meal" label="Dinner options" type="enum">
-            <camunda:value id="chicken" name="Chicken" />
-            <camunda:value id="salad" name="Salad" />
-          </camunda:formField>
-        </camunda:formData>
-      </bpmn:extensionElements>
+    <bpmn:userTask id="dinnerDecisionStep" name="Make a decision" camunda:formRef="dinnerDecisionForm" camunda:formRefBinding="latest">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_1rm10il</bpmn:incoming>
       <bpmn:outgoing>Flow_0pc9v99</bpmn:outgoing>
     </bpmn:userTask>
