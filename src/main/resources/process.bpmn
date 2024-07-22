@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1dlv2lv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <bpmn:process id="dinnerDecisionProcess" name="Dinner decision process" isExecutable="true" camunda:historyTimeToLive="P180D">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1rm10il</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1rm10il" sourceRef="StartEvent_1" targetRef="dinnerDecisionStep" />
+    <bpmn:exclusiveGateway id="Gateway_088km2s">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0pc9v99</bpmn:incoming>
+      <bpmn:outgoing>chickenFlow</bpmn:outgoing>
+      <bpmn:outgoing>saladFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0pc9v99" sourceRef="dinnerDecisionStep" targetRef="Gateway_088km2s" />
+    <bpmn:sequenceFlow id="chickenFlow" name="chicken" sourceRef="Gateway_088km2s" targetRef="Activity_17wvim0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${mealType=='chicken'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="saladFlow" name="salad" sourceRef="Gateway_088km2s" targetRef="Activity_1mvsvq0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${mealType=='salad'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_0zizaw3">
+      <bpmn:incoming>Flow_1nwrvq2</bpmn:incoming>
+      <bpmn:incoming>Flow_181i0w4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0q64v71</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1nwrvq2" sourceRef="Activity_1mvsvq0" targetRef="Gateway_0zizaw3" />
+    <bpmn:sequenceFlow id="Flow_181i0w4" sourceRef="Activity_17wvim0" targetRef="Gateway_0zizaw3" />
+    <bpmn:endEvent id="Event_140zejv">
+      <bpmn:incoming>Flow_0q64v71</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0q64v71" sourceRef="Gateway_0zizaw3" targetRef="Event_140zejv" />
+    <bpmn:userTask id="dinnerDecisionStep" name="Make a decision">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="mealType">${meal}</camunda:outputParameter>
+        </camunda:inputOutput>
+        <camunda:formData>
+          <camunda:formField id="meal" label="Dinner options" type="enum">
+            <camunda:value id="chicken" name="Chicken" />
+            <camunda:value id="salad" name="Salad" />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1rm10il</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pc9v99</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_17wvim0" name="Prepare Chicken" camunda:class="com.example.workflow.Task1Service">
+      <bpmn:incoming>chickenFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_181i0w4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1mvsvq0" name="Prepare Salad" camunda:class="com.example.workflow.Task2Service">
+      <bpmn:incoming>saladFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nwrvq2</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="dinnerDecisionProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_088km2s_di" bpmnElement="Gateway_088km2s" isMarkerVisible="true">
+        <dc:Bounds x="425" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0zizaw3_di" bpmnElement="Gateway_0zizaw3" isMarkerVisible="true">
+        <dc:Bounds x="705" y="92" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_140zejv_di" bpmnElement="Event_140zejv">
+        <dc:Bounds x="832" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1d6cs30_di" bpmnElement="dinnerDecisionStep">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1v43s6l_di" bpmnElement="Activity_17wvim0">
+        <dc:Bounds x="530" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0waoukh_di" bpmnElement="Activity_1mvsvq0">
+        <dc:Bounds x="530" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1rm10il_di" bpmnElement="Flow_1rm10il">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pc9v99_di" bpmnElement="Flow_0pc9v99">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="425" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1t8onxr_di" bpmnElement="chickenFlow">
+        <di:waypoint x="475" y="117" />
+        <di:waypoint x="530" y="117" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="485" y="99" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1djibr2_di" bpmnElement="saladFlow">
+        <di:waypoint x="450" y="142" />
+        <di:waypoint x="450" y="230" />
+        <di:waypoint x="530" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="453" y="183" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nwrvq2_di" bpmnElement="Flow_1nwrvq2">
+        <di:waypoint x="630" y="230" />
+        <di:waypoint x="730" y="230" />
+        <di:waypoint x="730" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_181i0w4_di" bpmnElement="Flow_181i0w4">
+        <di:waypoint x="630" y="117" />
+        <di:waypoint x="705" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q64v71_di" bpmnElement="Flow_0q64v71">
+        <di:waypoint x="755" y="117" />
+        <di:waypoint x="832" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
