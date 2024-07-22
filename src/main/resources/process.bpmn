@@ -17,10 +17,10 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0pc9v99" sourceRef="dinnerDecisionStep" targetRef="Gateway_088km2s" />
     <bpmn:sequenceFlow id="chickenFlow" name="chicken" sourceRef="Gateway_088km2s" targetRef="Activity_17wvim0">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${mealType=='chicken'}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${meal=='chicken'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="saladFlow" name="salad" sourceRef="Gateway_088km2s" targetRef="Activity_1mvsvq0">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${mealType=='salad'}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${meal=='salad'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="Gateway_0zizaw3">
       <bpmn:incoming>Flow_1nwrvq2</bpmn:incoming>
@@ -35,9 +35,6 @@
     <bpmn:sequenceFlow id="Flow_0q64v71" sourceRef="Gateway_0zizaw3" targetRef="Event_140zejv" />
     <bpmn:userTask id="dinnerDecisionStep" name="Make a decision">
       <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="mealType">${meal}</camunda:outputParameter>
-        </camunda:inputOutput>
         <camunda:formData>
           <camunda:formField id="meal" label="Dinner options" type="enum">
             <camunda:value id="chicken" name="Chicken" />
