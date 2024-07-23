@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "957d5bea-221b-460c-ace6-ff58645ecb01",
+		"name": "Camunda REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "582042"
+	},
+	"item": [
+		{
+			"name": "Get Processes definitions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Processes definitions By key",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/dinnerDecisionProcess",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"dinnerDecisionProcess"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Process",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"variables\":{\r\n        \"amount\": {\r\n            \"value\": 30,\r\n            \"type\": \"Double\"\r\n        }\r\n    },\r\n    \"businessKey\": \"Reason1 for starting process\",\r\n    \"withVariablesInReturn\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/dinnerDecisionProcess/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"dinnerDecisionProcess",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Process Instances",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"variables\":{\r\n        \"meal\": {\r\n            \"value\": \"chicken\"\r\n        }\r\n    },\r\n    \"withVariablesInReturn\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-instance?processDefinitionKey=dinnerDecisionProcess",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-instance"
+					],
+					"query": [
+						{
+							"key": "processDefinitionKey",
+							"value": "dinnerDecisionProcess"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Process Instance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"variables\":{\r\n        \"meal\": {\r\n            \"value\": \"chicken\"\r\n        }\r\n    },\r\n    \"withVariablesInReturn\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-instance/2bdf58b3-48c1-11ef-b4d0-00ff07a945a4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-instance",
+						"2bdf58b3-48c1-11ef-b4d0-00ff07a945a4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User task of running process",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"variables\":{\r\n        \"amount\": {\r\n            \"value\": 30,\r\n            \"type\": \"Double\"\r\n        }\r\n    },\r\n    \"businessKey\": \"Reason1 for starting process\",\r\n    \"withVariablesInReturn\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task?processInstanceId=ed7a3b81-48c6-11ef-b4d0-00ff07a945a4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task"
+					],
+					"query": [
+						{
+							"key": "processInstanceId",
+							"value": "ed7a3b81-48c6-11ef-b4d0-00ff07a945a4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Execute User task",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "padmin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "uadmin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"variables\":{\r\n        \"meal\": {\r\n            \"value\": \"chicken\"\r\n        }\r\n    },\r\n    \"withVariablesInReturn\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task/ed7d48c6-48c6-11ef-b4d0-00ff07a945a4/complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task",
+						"ed7d48c6-48c6-11ef-b4d0-00ff07a945a4",
+						"complete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
