@@ -10,6 +10,10 @@ public class Task1Service implements JavaDelegate {
     private static final Logger LOG = LoggerFactory.getLogger(Task1Service.class);
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
+        String businessKey = delegateExecution.getProcessBusinessKey();
         LOG.info("!!!!!!!!!!!!!!!!!!!!Task1Service executed!!!!!!!!!!!x");
+        LOG.info("!!!!!!!!!!!!!!!!!!!!Business key = " + businessKey);
+        String mealType = (String) delegateExecution.getVariable("meal");
+        LOG.info("Meal type selected = " + mealType);
     }
 }
